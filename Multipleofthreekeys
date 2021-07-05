@@ -1,0 +1,46 @@
+  public IEnumerable<Tuple<int, int, int>> Get()
+        {
+            int N = 23;
+            int count = 0;
+            List<int> divisions = new List<int>();
+
+            for (int i = 1; i <= N / 2; i++)
+            {
+                if (N % i == 0)
+                {
+                    divisions.Add(i);
+                }
+            }
+           
+            List<Tuple<int, int, int>> multiples = new List<Tuple<int, int, int>>();
+
+            for (int i = 0; i < divisions.Count; i++)
+            {
+                for (int j = 0; j <= i; j++)
+                {
+                    for (int k = 0; k <= j; k++)
+                    {
+                        int iv = divisions[i];
+                        int jv = divisions[j];
+                        int kv = divisions[k];
+                        if (iv != jv && jv != kv && iv != kv)
+                        {
+                            int result = iv * jv * kv;
+                            if (result == N)
+                            {
+                                var newdiv = new Tuple<int, int, int>(iv, jv, kv);
+                                multiples.Add(newdiv);
+
+                                count++;
+                            }
+                            if (result > N)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return multiples;
+        }
+    }
